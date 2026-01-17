@@ -97,7 +97,7 @@ export default function Sidebar() {
     () => [
       {
         id: "start" as const,
-        name: "WORKSPACE",
+        name: t("WORKSPACE"),
         items: buildNavItems(sidebarNavOrder.start),
       },
       {
@@ -270,7 +270,7 @@ export default function Sidebar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors"
-                title="Visit DeepTutor Homepage"
+                title={t("Visit DeepTutor Homepage")}
               >
                 <Globe className="w-4 h-4" />
               </a>
@@ -279,7 +279,7 @@ export default function Sidebar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors"
-                title="View on GitHub"
+                title={t("View on GitHub")}
               >
                 <Github className="w-4 h-4" />
               </a>

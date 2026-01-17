@@ -162,9 +162,9 @@ export default function HistoryPage() {
 
       let dateKey: string;
       if (date.toDateString() === today.toDateString()) {
-        dateKey = "Today";
+        dateKey = t("Today");
       } else if (date.toDateString() === yesterday.toDateString()) {
-        dateKey = "Yesterday";
+        dateKey = t("Yesterday");
       } else {
         dateKey = date.toLocaleDateString(
           uiSettings.language === "zh" ? "zh-CN" : "en-US",
@@ -362,7 +362,7 @@ export default function HistoryPage() {
                 </h2>
                 <span className="text-xs text-slate-400 ml-auto">
                   {chatSessions.length}{" "}
-                  {chatSessions.length === 1 ? "session" : "sessions"}
+                  {chatSessions.length === 1 ? t("session") : t("sessions")}
                 </span>
               </div>
               <div className="divide-y divide-slate-100 dark:divide-slate-700">
@@ -408,7 +408,7 @@ export default function HistoryPage() {
                           </h3>
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-xs text-slate-400 dark:text-slate-500">
-                              {session.message_count} messages
+                              {session.message_count} {t("messages")}
                             </span>
                             {session.last_message && (
                               <p className="text-sm text-slate-500 dark:text-slate-400 truncate flex-1">

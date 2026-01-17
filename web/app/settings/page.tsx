@@ -17,9 +17,11 @@ import { useGlobal } from "@/context/GlobalContext";
 import { OverviewTab, ConfigTab } from "./components";
 import { FullStatus, PortsInfo, TabType } from "./types";
 import { LANGUAGE_OPTIONS } from "./constants";
+import { getTranslation } from "@/lib/i18n";
 
 export default function SettingsPage() {
   const { uiSettings, updateTheme, updateLanguage } = useGlobal();
+  const t = (key: string) => getTranslation(uiSettings.language, key);
 
   const [activeTab, setActiveTab] = useState<TabType>("overview");
   const [status, setStatus] = useState<FullStatus | null>(null);
@@ -61,17 +63,17 @@ export default function SettingsPage() {
   const tabs: { id: TabType; label: string; icon: React.ReactNode }[] = [
     {
       id: "overview",
-      label: "Overview",
+      label: t("Overview"),
       icon: <SettingsIcon className="w-4 h-4" />,
     },
-    { id: "llm", label: "LLM", icon: <Brain className="w-4 h-4" /> },
+    { id: "llm", label: t("LLM"), icon: <Brain className="w-4 h-4" /> },
     {
       id: "embedding",
-      label: "Embedding",
+      label: t("Embedding"),
       icon: <Database className="w-4 h-4" />,
     },
-    { id: "tts", label: "TTS", icon: <Volume2 className="w-4 h-4" /> },
-    { id: "search", label: "Search", icon: <Search className="w-4 h-4" /> },
+    { id: "tts", label: t("TTS"), icon: <Volume2 className="w-4 h-4" /> },
+    { id: "search", label: t("Web Search"), icon: <Search className="w-4 h-4" /> },
   ];
 
   if (loading) {
@@ -92,12 +94,10 @@ export default function SettingsPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-              {uiSettings.language === "zh" ? "设置" : "Settings"}
+              {t("Settings")}
             </h1>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              {uiSettings.language === "zh"
-                ? "配置 AI 服务和界面偏好"
-                : "Configure your AI services and preferences"}
+              {t("Configure your AI services and preferences")}
             </p>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default function SettingsPage() {
                 ) : (
                   <Sun className="w-4 h-4" />
                 )}
-                <span>{uiSettings.language === "zh" ? "主题" : "Theme"}</span>
+                <span>{t("Theme")}</span>
               </div>
               <div className="flex p-1 bg-slate-100 dark:bg-slate-700 rounded-lg">
                 <button
@@ -125,7 +125,7 @@ export default function SettingsPage() {
                   }`}
                 >
                   <Sun className="w-3.5 h-3.5" />
-                  {uiSettings.language === "zh" ? "浅色" : "Light"}
+                  {t("Light")}
                 </button>
                 <button
                   onClick={() => updateTheme("dark")}
@@ -136,7 +136,7 @@ export default function SettingsPage() {
                   }`}
                 >
                   <Moon className="w-3.5 h-3.5" />
-                  {uiSettings.language === "zh" ? "深色" : "Dark"}
+                  {t("Dark")}
                 </button>
               </div>
             </div>
@@ -148,9 +148,7 @@ export default function SettingsPage() {
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                 <Globe className="w-4 h-4" />
-                <span>
-                  {uiSettings.language === "zh" ? "语言" : "Language"}
-                </span>
+                <span>{t("Language")}</span>
               </div>
               <div className="flex p-1 bg-slate-100 dark:bg-slate-700 rounded-lg">
                 {LANGUAGE_OPTIONS.map((lang) => (
@@ -197,16 +195,16 @@ export default function SettingsPage() {
           {activeTab === "llm" && (
             <ConfigTab
               configType="llm"
-              title="LLM Configuration"
-              description="Configure language model providers"
+              title={t("LLM Configuration")}
+              description={t("Configure language model providers")}
               onUpdate={loadStatus}
             />
           )}
           {activeTab === "embedding" && (
             <ConfigTab
               configType="embedding"
-              title="Embedding Configuration"
-              description="Configure embedding model providers"
+              title={t("Embedding Configuration")}
+              description={t("Configure embedding model providers")}
               onUpdate={loadStatus}
               showDimensions
             />
@@ -214,8 +212,8 @@ export default function SettingsPage() {
           {activeTab === "tts" && (
             <ConfigTab
               configType="tts"
-              title="TTS Configuration"
-              description="Configure text-to-speech providers"
+              title={t("TTS Configuration")}
+              description={t("Configure text-to-speech providers")}
               onUpdate={loadStatus}
               showVoice
             />
@@ -223,8 +221,8 @@ export default function SettingsPage() {
           {activeTab === "search" && (
             <ConfigTab
               configType="search"
-              title="Search Configuration"
-              description="Configure web search providers"
+              title={t("Search Configuration")}
+              description={t("Configure web search providers")}
               onUpdate={loadStatus}
               isSearchConfig
             />
